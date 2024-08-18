@@ -39,22 +39,23 @@ class MyApp extends StatelessWidget {
               child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ComprehensiveDropdownMenu(
+          CDropdownMenu(
             margin: EdgeInsets.symmetric(horizontal: 45),
             enableFilter: true,
 
             focusNode: FocusNode(),
-            actionWidgetPosition: ActionWidgetPosition.bottom,
-            actionWidget: TextButton(
+            actionWidgetPosition: ActionWidgetPosition.top,
+            actionWidget: TextButton.icon(
               onPressed: () {
                 log('action worked');
               },
-              child: const Text('Add Item'),
+              label: const Text('Add Item'),
+              icon: Icon(Icons.add),
             ),
             menuEntries: const [
-              ComprehensiveDropdownMenuEntry(value: "Cat", label: 'Cat'),
-              ComprehensiveDropdownMenuEntry(value: "Dog", label: 'Dog'),
-              ComprehensiveDropdownMenuEntry(
+              CMenuEntry(value: "Cat", label: 'Cat'),
+              CMenuEntry(value: "Dog", label: 'Dog'),
+              CMenuEntry(
                   value: "Elephant", label: 'Elephant'),
             ],
           ),

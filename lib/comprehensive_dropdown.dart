@@ -21,9 +21,9 @@ String actionBTN = 'ActionBTN';
 ///
 /// If a match doesn't exist then null must be returned.
 ///
-/// Used by [ComprehensiveDropdownMenu.searchCallback].
+/// Used by [CDropdownMenu.searchCallback].
 typedef SearchCallback<T> = int? Function(
-    List<ComprehensiveDropdownMenuEntry<T>> entries, String query);
+    List<CMenuEntry<T>> entries, String query);
 
 // Navigation shortcuts to move the selected menu items up or down.
 final Map<ShortcutActivator, Intent> _kMenuTraversalShortcuts =
@@ -32,14 +32,14 @@ final Map<ShortcutActivator, Intent> _kMenuTraversalShortcuts =
   LogicalKeySet(LogicalKeyboardKey.arrowDown): const _ArrowDownIntent(),
 };
 
-/// Defines a [ComprehensiveDropdownMenu] menu button that represents one item view in the menu.
+/// Defines a [CDropdownMenu] menu button that represents one item view in the menu.
 ///
 /// See also:
 ///
-/// * [ComprehensiveDropdownMenu]
-class ComprehensiveDropdownMenuEntry<T> {
-  /// Creates an entry that is used with [ComprehensiveDropdownMenu.menuEntries].
-  const ComprehensiveDropdownMenuEntry({
+/// * [CDropdownMenu]
+class CMenuEntry<T> {
+  /// Creates an entry that is used with [CDropdownMenu.menuEntries].
+  const CMenuEntry({
     required this.value,
     required this.label,
     this.labelWidget,
@@ -51,7 +51,7 @@ class ComprehensiveDropdownMenuEntry<T> {
 
   /// the value used to identify the entry.
   ///
-  /// This value must be unique across all entries in a [ComprehensiveDropdownMenu].
+  /// This value must be unique across all entries in a [CDropdownMenu].
   final T value;
 
   /// The label displayed in the center of the menu item.
@@ -76,8 +76,8 @@ class ComprehensiveDropdownMenuEntry<T> {
 
   /// Whether the menu item is enabled or disabled.
   ///
-  /// The default value is true. If true, the [ComprehensiveDropdownMenuEntry.label] will be filled
-  /// out in the text field of the [ComprehensiveDropdownMenu] when this entry is clicked; otherwise,
+  /// The default value is true. If true, the [CMenuEntry.label] will be filled
+  /// out in the text field of the [CDropdownMenu] when this entry is clicked; otherwise,
   /// this entry is disabled.
   final bool enabled;
 
@@ -94,7 +94,7 @@ class ComprehensiveDropdownMenuEntry<T> {
 /// selected item into the text input field. People can also filter the list based
 /// on the text input or search one item in the menu list.
 ///
-/// The menu is composed of a list of [ComprehensiveDropdownMenuEntry]s. People can provide information,
+/// The menu is composed of a list of [CMenuEntry]s. People can provide information,
 /// such as: label, leading icon or trailing icon for each entry. The [TextField]
 /// will be updated based on the selection from the menu entries. The text field
 /// will stay empty if the selected entry is disabled.
@@ -106,7 +106,7 @@ class ComprehensiveDropdownMenuEntry<T> {
 /// The menu can be scrollable if not all items in the list are displayed at once.
 ///
 /// {@tool dartpad}
-/// This sample shows how to display outlined [ComprehensiveDropdownMenu] and filled [ComprehensiveDropdownMenu].
+/// This sample shows how to display outlined [CDropdownMenu] and filled [CDropdownMenu].
 ///
 /// ** See code in examples/api/lib/material/dropdown_menu/dropdown_menu.0.dart **
 /// {@end-tool}
@@ -114,11 +114,11 @@ class ComprehensiveDropdownMenuEntry<T> {
 /// See also:
 ///
 /// * [MenuAnchor], which is a widget used to mark the "anchor" for a set of submenus.
-///   The [ComprehensiveDropdownMenu] uses a [TextField] as the "anchor".
+///   The [CDropdownMenu] uses a [TextField] as the "anchor".
 /// * [TextField], which is a text input widget that uses an [InputDecoration].
-/// * [ComprehensiveDropdownMenuEntry], which is used to build the [MenuItemButton] in the [ComprehensiveDropdownMenu] list.
-class ComprehensiveDropdownMenu<T> extends StatefulWidget {
-  /// Creates a const [ComprehensiveDropdownMenu].
+/// * [CMenuEntry], which is used to build the [MenuItemButton] in the [CDropdownMenu] list.
+class CDropdownMenu<T> extends StatefulWidget {
+  /// Creates a const [CDropdownMenu].
   ///
   /// The leading and trailing icons in the text field can be customized by using
   /// [leadingIcon], [trailingIcon] and [selectedTrailingIcon] properties. They are
@@ -127,7 +127,7 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   ///
   /// Except leading and trailing icons, the text field can be configured by the
   /// [InputDecorationTheme] property. The menu can be configured by the [menuStyle].
-  const ComprehensiveDropdownMenu({
+  const CDropdownMenu({
     super.key,
     this.enabled = true,
     this.width,
@@ -157,14 +157,14 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
     this.actionWidgetPosition = ActionWidgetPosition.top,
   });
 
-  /// Determine if the [ComprehensiveDropdownMenu] is enabled.
+  /// Determine if the [CDropdownMenu] is enabled.
   ///
   /// Defaults to true.
   final bool enabled;
 
-  /// Determine the width of the [ComprehensiveDropdownMenu].
+  /// Determine the width of the [CDropdownMenu].
   ///
-  /// If this is null, the width of the [ComprehensiveDropdownMenu] will be the same as the width of the widest
+  /// If this is null, the width of the [CDropdownMenu] will be the same as the width of the widest
   /// menu item plus the width of the leading/trailing icon.
   final double? width;
 
@@ -200,7 +200,7 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   /// Defaults to null;
   final String? hintText;
 
-  /// Text that provides context about the [ComprehensiveDropdownMenu]'s value, such
+  /// Text that provides context about the [CDropdownMenu]'s value, such
   /// as how the value will be used.
   ///
   /// If non-null, the text is displayed below the input field, in
@@ -241,7 +241,7 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   /// Defaults to true as the search function could be commonly used.
   final bool enableSearch;
 
-  /// The text style for the [TextField] of the [ComprehensiveDropdownMenu];
+  /// The text style for the [TextField] of the [CDropdownMenu];
   ///
   /// Defaults to the overall theme's [TextTheme.bodyLarge]
   /// if the dropdown menu theme's value is null.
@@ -330,18 +330,18 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   /// Set this to true or false explicitly to override the default behavior.
   final bool? requestFocusOnTap;
 
-  /// Descriptions of the menu items in the [ComprehensiveDropdownMenu].
+  /// Descriptions of the menu items in the [CDropdownMenu].
   ///
-  /// This is a required parameter. It is recommended that at least one [ComprehensiveDropdownMenuEntry]
+  /// This is a required parameter. It is recommended that at least one [CMenuEntry]
   /// is provided. If this is an empty list, the menu will be empty and only
   /// contain space for padding.
-  final List<ComprehensiveDropdownMenuEntry<T>> menuEntries;
+  final List<CMenuEntry<T>> menuEntries;
 
   /// Defines the menu text field's width to be equal to its parent's width
   /// plus the horizontal width of the specified insets.
   ///
   /// If this property is null, the width of the text field will be determined
-  /// by the width of menu items or [ComprehensiveDropdownMenu.width]. If this property is not null,
+  /// by the width of menu items or [CDropdownMenu.width]. If this property is not null,
   /// the text field's width will match the parent's width plus the specified insets.
   /// If the value of this property is [EdgeInsets.zero], the width of the text field will be the same
   /// as its parent's width.
@@ -352,7 +352,7 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   /// Defaults to null.
   final EdgeInsets? margin;
 
-  /// When  [ComprehensiveDropdownMenu.enableSearch] is true, this callback is used to compute
+  /// When  [CDropdownMenu.enableSearch] is true, this callback is used to compute
   /// the index of the search result to be highlighted.
   ///
   /// {@tool snippet}
@@ -375,7 +375,7 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
   /// ```
   /// {@end-tool}
   ///
-  /// Defaults to null. If this is null and [ComprehensiveDropdownMenu.enableSearch] is true,
+  /// Defaults to null. If this is null and [CDropdownMenu.enableSearch] is true,
   /// the default function will return the index of the first matching result
   /// which contains the contents of the text input field.
   final SearchCallback<T>? searchCallback;
@@ -396,19 +396,20 @@ class ComprehensiveDropdownMenu<T> extends StatefulWidget {
 
   /// Allows adding an extra widget above or below the dropdown menu.
   final Widget? actionWidget;
+  /// Allows positioning the [actionWidget] on top or bottom of the options.
   final ActionWidgetPosition actionWidgetPosition;
 
   @override
-  State<ComprehensiveDropdownMenu<T>> createState() => _DropdownMenuState<T>();
+  State<CDropdownMenu<T>> createState() => _DropdownMenuState<T>();
 }
 
-class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
+class _DropdownMenuState<T> extends State<CDropdownMenu<T>> {
   final GlobalKey _cAnchorKey = GlobalKey();
   final GlobalKey _cLeadingKey = GlobalKey();
   late List<GlobalKey> buttonItemKeys;
   final MenuController _controller = MenuController();
   late bool _enableFilter;
-  late List<ComprehensiveDropdownMenuEntry<T>> filteredEntries;
+  late List<CMenuEntry<T>> filteredEntries;
   List<Widget>? _initialMenu;
   int? currentHighlight;
   double? leadingPadding;
@@ -419,10 +420,10 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
         (_localTextEditingController ??= TextEditingController());
   }
 
-  late ComprehensiveDropdownMenuEntry<T>? actionBtn;
+  late CMenuEntry<T>? actionBtn;
 
   setActionButton() {
-    List<ComprehensiveDropdownMenuEntry<T>> options = [];
+    List<CMenuEntry<T>> options = [];
     options.addAll(widget.menuEntries);
     if (actionBtn != null) {
       options.insert(
@@ -440,7 +441,7 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
 
     actionBtn = widget.actionWidget == null
         ? null
-        : ComprehensiveDropdownMenuEntry<T>(
+        : CMenuEntry<T>(
             value: actionBTN as T,
             label: 'Add Item',
             labelWidget: widget.actionWidget);
@@ -449,10 +450,10 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
     buttonItemKeys = List<GlobalKey>.generate(
         filteredEntries.length, (int index) => GlobalKey());
     _menuHasEnabledItem = filteredEntries
-        .any((ComprehensiveDropdownMenuEntry<T> entry) => entry.enabled);
+        .any((CMenuEntry<T> entry) => entry.enabled);
 
     final int index = filteredEntries.indexWhere(
-        (ComprehensiveDropdownMenuEntry<T> entry) =>
+        (CMenuEntry<T> entry) =>
             entry.value == widget.initialSelection);
     if (index != -1) {
       _textEditingController.value = TextEditingValue(
@@ -472,7 +473,7 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
   }
 
   @override
-  void didUpdateWidget(ComprehensiveDropdownMenu<T> oldWidget) {
+  void didUpdateWidget(CDropdownMenu<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       if (widget.controller != null) {
@@ -491,14 +492,14 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
       buttonItemKeys = List<GlobalKey>.generate(
           filteredEntries.length, (int index) => GlobalKey());
       _menuHasEnabledItem = filteredEntries
-          .any((ComprehensiveDropdownMenuEntry<T> entry) => entry.enabled);
+          .any((CMenuEntry<T> entry) => entry.enabled);
     }
     if (oldWidget.leadingIcon != widget.leadingIcon) {
       refreshLeadingPadding();
     }
     if (oldWidget.initialSelection != widget.initialSelection) {
       final int index = filteredEntries.indexWhere(
-          (ComprehensiveDropdownMenuEntry<T> entry) =>
+          (CMenuEntry<T> entry) =>
               entry.value == widget.initialSelection);
       if (index != -1) {
         _textEditingController.value = TextEditingValue(
@@ -555,13 +556,13 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
     return null;
   }
 
-  List<ComprehensiveDropdownMenuEntry<T>> filter(
-      List<ComprehensiveDropdownMenuEntry<T>> entries,
+  List<CMenuEntry<T>> filter(
+      List<CMenuEntry<T>> entries,
       TextEditingController textEditingController) {
     final String filterText = textEditingController.text.toLowerCase();
-    List<ComprehensiveDropdownMenuEntry<T>> filteredOption = [];
-    List<ComprehensiveDropdownMenuEntry<T>> filteredE = entries
-        .where((ComprehensiveDropdownMenuEntry<T> entry) =>
+    List<CMenuEntry<T>> filteredOption = [];
+    List<CMenuEntry<T>> filteredE = entries
+        .where((CMenuEntry<T> entry) =>
             entry.label.toLowerCase().contains(filterText))
         .toList();
     // console.log("Hello")
@@ -574,27 +575,27 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
     return filteredOption;
   }
 
-  int? search(List<ComprehensiveDropdownMenuEntry<T>> entries,
+  int? search(List<CMenuEntry<T>> entries,
       TextEditingController textEditingController) {
     final String searchText = textEditingController.value.text.toLowerCase();
     if (searchText.isEmpty) {
       return null;
     }
     final int index = entries.indexWhere(
-        (ComprehensiveDropdownMenuEntry<T> entry) =>
+        (CMenuEntry<T> entry) =>
             entry.label.toLowerCase().contains(searchText));
 
     return index != -1 ? index : null;
   }
 
   List<Widget> _buildButtons(
-      List<ComprehensiveDropdownMenuEntry<T>> filteredEntries,
+      List<CMenuEntry<T>> filteredEntries,
       TextDirection textDirection,
       {int? focusedIndex,
       bool enableScrollToHighlight = true}) {
     final List<Widget> result = <Widget>[];
     for (int i = 0; i < filteredEntries.length; i++) {
-      final ComprehensiveDropdownMenuEntry<T> entry = filteredEntries[i];
+      final CMenuEntry<T> entry = filteredEntries[i];
 
       // By default, when the text field has a leading icon but a menu entry doesn't
       // have one, the label of the entry should have extra padding to be aligned
@@ -818,7 +819,7 @@ class _DropdownMenuState<T> extends State<ComprehensiveDropdownMenu<T>> {
             controller: _textEditingController,
             onEditingComplete: () {
               if (currentHighlight != null) {
-                final ComprehensiveDropdownMenuEntry<T> entry =
+                final CMenuEntry<T> entry =
                     filteredEntries[currentHighlight!];
                 if (entry.enabled) {
                   _textEditingController.value = TextEditingValue(
