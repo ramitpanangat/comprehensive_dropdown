@@ -11,29 +11,64 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# comprehensive_dropdown
 
 ## Features
 
 TODO: List what your package can do. Maybe include images, gifs, or videos.
 
-## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+***
+  ## Getting started <br> <br>
+  
+  To use this plugin, add `comprehensive_dropdown` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
+
+
+import the package in your dart file
+
+```dart
+import  'package:comprehensive_dropdown/comprehensive_dropdown.dart';
+```  
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+**Add additional widgets to your dropdown menu**
+
+You can use this to add additional button to add/create item.
 
 ```dart
-const like = 'sample';
+CDropdownMenu(
+    margin: EdgeInsets.symmetric(horizontal: 45),
+    enableFilter: true,
+    focusNode: FocusNode(),
+    actionWidgetPosition: ActionWidgetPosition.bottom,
+    actionWidget: TextButton.icon(
+    onPressed: () {
+        log('action worked');
+    },
+    label: const Text('Add Item'),
+    icon: Icon(Icons.add),
+    ),
+    menuEntries: const [
+        CMenuEntry(value: "Cat", label: 'Cat'),
+        CMenuEntry(value: "Dog", label: 'Dog'),
+        CMenuEntry(value: "Elephant", label: 'Elephant'),
+    ],
+)
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+or add description for the options
+```dart
+CDropdownMenu(
+    margin: EdgeInsets.symmetric(horizontal: 45),
+    enableFilter: true,
+    focusNode: FocusNode(),
+    actionWidgetPosition: ActionWidgetPosition.top,
+    actionWidget: Text("filter applied = [[category='Animals']]"),
+    menuEntries: const [
+        CMenuEntry(value: "Cat", label: 'Cat'),
+        CMenuEntry(value: "Dog", label: 'Dog'),
+        CMenuEntry(value: "Elephant", label: 'Elephant'),
+    ],
+)
+```

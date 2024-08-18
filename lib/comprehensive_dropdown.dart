@@ -4,14 +4,12 @@ library comprehensive_dropdown;
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:developer';
 import 'dart:math' as math;
-
+import 'package:comprehensive_dropdown/src/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-import 'constants.dart';
 
 // Examples can assume:
 // late BuildContext context;
