@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:comprehensive_dropdown/comprehensive_dropdown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,23 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Comprehensive Dropdown',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -50,23 +37,39 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent,
+        title: const Text(
+          "Comprehensive Dropdown",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 200.0),
         child: CDropdownMenu(
-          margin: EdgeInsets.symmetric(horizontal: 45),
-          enableFilter: true,
-          focusNode: FocusNode(),
+          margin: const EdgeInsets.symmetric(horizontal: 45),
+          enableFilter: false,
           actionWidgetPosition: ActionWidgetPosition.bottom,
+          hintText: "Select Animal",
           actionWidget: TextButton.icon(
-            onPressed: () {
-              log('action worked');
-            },
-            label: const Text('Add Item'),
-            icon: Icon(Icons.add),
+            style: TextButton.styleFrom(padding: EdgeInsetsDirectional.zero),
+              icon: const Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+              label: const Text("Add Item", style: TextStyle(color: Colors.white),)),
+          trailingIcon: const Icon(
+            CupertinoIcons.chevron_down,
+            size: 18,
           ),
+          menuStyle: MenuStyle(
+              shadowColor: const WidgetStatePropertyAll<Color>( Colors.transparent),
+              backgroundColor:WidgetStatePropertyAll<Color>( Colors.redAccent.withOpacity(0.8))),
           menuEntries: const [
-            CMenuEntry(value: "Cat", label: 'Cat'),
-            CMenuEntry(value: "Dog", label: 'Dog'),
-            CMenuEntry(value: "Elephant", label: 'Elephant'),
+            CMenuEntry(value: "Cat", label: 'Cat', labelWidget: Text("Cat", style: TextStyle(color: Colors.white),)),
+            CMenuEntry(value: "Dog", label: 'Dog', labelWidget: Text("Dog", style: TextStyle(color: Colors.white),)),
+            CMenuEntry(value: "Elephant", label: 'Elephant', labelWidget: Text("Elephant", style: TextStyle(color: Colors.white),)),
           ],
         ),
       ),
