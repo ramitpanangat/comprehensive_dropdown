@@ -13,6 +13,8 @@ and the Flutter guide for
 
 # comprehensive_dropdown
 
+A dropdown widget with additional features. 🚀 <br><br>
+![In-App Review Android Demo](https://raw.githubusercontent.com/ramitpanangat/comprehensive_dropdown/main/assets/banner.png)
 
 ***
   ## Getting started <br> <br>
