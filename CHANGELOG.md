@@ -4,6 +4,6 @@
 2. Align additional widget to top or bottom of menu
 3. All basic functionality of DropdownMenu
 
-## 0.0.1
+## 0.0.2
 
 1. README updated
